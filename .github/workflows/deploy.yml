@@ -20,18 +20,18 @@ jobs:
           sudo apt-get install -y python3.11 python3.11-venv python3-pip jq zip
           pip3 install boto3
 
-        - name: Set environment variables
-          id: set-env-vars
-          run: |
-            if [[ "${{ github.ref_name }}" == "main" ]]; then
-              echo "ENV=prod" >> $GITHUB_ENV
-              echo "API_KEY=prod_api_key" >> $GITHUB_ENV
-              echo "LOG_LEVEL=INFO" >> $GITHUB_ENV
-            else
-              echo "ENV=test" >> $GITHUB_ENV
-              echo "API_KEY=test_api_key" >> $GITHUB_ENV
-              echo "LOG_LEVEL=DEBUG" >> $GITHUB_ENV
-            fi
+      - name: Set environment variables
+        id: set-env-vars
+        run: |
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
+            echo "ENV=prod" >> $GITHUB_ENV
+            echo "API_KEY=prod_api_key" >> $GITHUB_ENV
+            echo "LOG_LEVEL=INFO" >> $GITHUB_ENV
+          else
+            echo "ENV=test" >> $GITHUB_ENV
+            echo "API_KEY=test_api_key" >> $GITHUB_ENV
+            echo "LOG_LEVEL=DEBUG" >> $GITHUB_ENV
+          fi
 
       - name: Package Lambda Function
         run: |
